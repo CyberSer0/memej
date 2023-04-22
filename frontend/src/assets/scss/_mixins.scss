@@ -1,0 +1,5 @@
+@mixin font-styles($size, $line-height: null, $weight: null) {
+    font-size: $size + rem;
+    @if $line-height { line-height: calc($line-height/$size); }
+    @if $weight { font-weight: $weight; }
+}

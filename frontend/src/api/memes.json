@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "title": "Mem",
+        "image": "assets/images/logo.png",
+        "comments": [
+            {
+                "id": 1,
+                "author": {
+                    "id": 1,
+                    "name": "f10k1",
+                    "image": "assets/images/logo.png"
+                },
+                "content": "Komentarz",
+                "comments": [
+                    {
+                        "id": 2,
+                        "author": {
+                            "id": 1,
+                            "name": "f10k1",
+                            "image": "assets/images/logo.png"
+                        },
+                        "content": "Komentarz",
+                        "pluses": 10,
+                        "minuses": 2
+                    }
+                ],
+                "pluses": 0,
+                "minuses": 0
+            }
+        ],
+        "pluses": 100,
+        "minuses": 10,
+        "tags": [
+            {
+                "id": 1,
+                "name": "sweden"
+            }
+        ],
+        "author": {
+            "id": 1,
+            "image": "assets/images/logo.png",
+            "name": "f10k1"
+        }
+    },
+    {
+        "id": 2,
+        "title": "Mem2",
+        "image": "assets/images/logo.png",
+        "comments": [],
+        "pluses": 100,
+        "minuses": 10,
+        "tags": [
+            {
+                "id": 1,
+                "name": "sweden"
+            }
+        ],
+        "author": {
+            "id": 1,
+            "name": "f10k1",
+            "image": "assets/images/logo.png"
+        }
+    }
+]

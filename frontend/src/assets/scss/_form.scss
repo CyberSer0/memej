@@ -1,0 +1,17 @@
+.form-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--white);
+    background: transparent;
+    color: var(--white);
+    padding: 10px;
+    &::placeholder {
+        color: white;
+    }
+}

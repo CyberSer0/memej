@@ -1,0 +1,23 @@
+<div class="meme" [ngClass]="{subpage: subPage}" *ngIf="meme">
+    <div class="top">
+        <a routerLink="['/user', meme.author.id]" class=""><img [src]="meme.author.image" alt="">
+            {{meme.author.name}}</a>
+    </div>
+    <div class="title"><a [routerLink]="['/meme', meme.id]" class="link">{{meme.title}}</a></div>
+    <a [routerLink]="['/meme', meme.id]" class="img"><img #image [src]="meme.image" [title]="meme.title"
+            [alt]="meme.title">
+        <span class="info" *ngIf="!subPage">Zobacz cały obrazek</span></a>
+    <ul class="tags clean-list">
+        <li *ngFor="let tag of meme.tags; trackBy: tagTrackBy">
+            <a [routerLink]="['/category', tag.name]" class="btn btn--small btn--grey">{{tag.name}}</a>
+        </li>
+    </ul>
+    <div class="bottom">
+        <button class="btn btn--small btn--transparent btn--icon"><span
+                class="btn__icon btn__icon--transparent icon--arrow-up"></span>{{meme.pluses}}</button>
+        <button class="btn btn--small btn--transparent btn--icon"><span
+                class="btn__icon btn__icon--transparent icon--arrow-down"></span>{{meme.minuses}}</button>
+        <button class="btn btn--small btn--transparent btn--icon"><span
+                class="btn__icon btn__icon--transparent icon--comment"></span>{{meme.comments.length}}</button>
+    </div>
+</div>

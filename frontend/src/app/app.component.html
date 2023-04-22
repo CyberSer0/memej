@@ -1,0 +1,16 @@
+<nav>
+    <a routerLink="/">
+        <img src="assets/images/logo.png" alt="logo">
+    </a>
+    <ul class="clean-list">
+        <li><a routerLink="/add-image" class="link" routerLinkActive="active">Dodaj</a></li>
+        <li><a routerLink="/waiting-room" class="link">Poczekalnia</a></li>
+        <li><a routerLink="/categories" class="link">Kategorie</a></li>
+        <li><a routerLink="/categories" class="link">Top</a></li>
+    </ul>
+    <a routerLink="/login" class="login btn">Login</a>
+</nav>
+
+<main>
+    <router-outlet></router-outlet>
+</main>

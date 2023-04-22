@@ -1,0 +1,7 @@
+<section class="container" *ngIf="memes$ | async as memes">
+    <ul class="clean-list">
+        <li *ngFor="let meme of memes; trackBy: memeTrackBy">
+            <app-meme [meme]="meme" />
+        </li>
+    </ul>
+</section>

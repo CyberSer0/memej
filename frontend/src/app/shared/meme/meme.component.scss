@@ -1,0 +1,60 @@
+@import "mixins";
+
+.meme {
+    background-color: var(--primary);
+    padding: 10px 30px;
+    width: fit-content;
+    margin: auto;
+    &:not(.subpage) {
+        .img {
+            max-height: 500px;
+            display: block;
+            overflow: hidden;
+            position: relative;
+            &--too-large {
+                .info {
+                    display: block !important;
+                }
+            }
+            img {
+                height: 100%;
+            }
+            .info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                text-align: center;
+                display: none;
+                color: var(--primary);
+                background-color: var(--yellow);
+            }
+        }
+    }
+    .top {
+        a {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+        }
+        padding: 10px 0;
+    }
+    .title {
+        @include font-styles(35);
+        padding: 10px 0;
+    }
+    .tags {
+        padding: 20px;
+    }
+    .bottom {
+        padding: 20px 0;
+        display: flex;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,73 @@
+<div class="container" *ngIf="meme">
+    <app-meme [meme]="meme" [subPage]="true"></app-meme>
+    <div class="">
+        <h3>Komentarze</h3>
+        <div class="add-reply" *ngIf="user$ | async as user; else noUser">
+            <img [src]="user.image" alt="">
+            <span>{{user.name}}</span>
+            <div class="form-group">
+                <input type="text" placeholder="Dodaj komentarz">
+                <button class="btn btn--transparent btn--no-border btn--small btn--icon">
+                    <span class="icon--send btn__icon btn__icon--transparent"></span>
+                </button>
+            </div>
+        </div>
+        <ng-template #noUser>
+            <div class="add-reply">
+                <img src="assets/images/logo.png" alt="">
+                <span>Anon</span>
+                <div class="form-group">
+                    <input type="text" placeholder="Dodaj komentarz">
+                    <button class="btn btn--transparent btn--no-border btn--small btn--icon">
+                        <span class="icon--send btn__icon btn__icon--transparent"></span>
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+        <ul class="clean-list comments">
+            <li class="comment" *ngFor="let comment of meme.comments; trackBy:commentsTrackBy">
+                <div class="comment__content">
+                    <img [src]="comment.author.image" alt="">
+                    <span class="author">{{comment.author.name}}</span>
+                    <span class="content">{{comment.content}}</span>
+                </div>
+                <div class="comment__buttons">
+                    <button class="btn btn--transparent btn--small"
+                        (click)="addComment($event, comment.id)">Odpowiedz</button>
+                    <button class="btn btn--transparent btn--small btn--icon"><span
+                            class="icon--arrow-up btn__icon btn__icon--transparent"></span> {{comment.pluses}}</button>
+                    <button class="btn btn--transparent btn--small btn--icon"><span
+                            class="icon--arrow-down btn__icon btn__icon--transparent"></span>
+                        {{comment.minuses}}</button>
+                </div>
+                <div class="comment__replies" *ngIf="comment.comments">
+                    <a *ngIf="!showResponses; else elseBlock" href="javascript:void(0)" class="link"
+                        (click)="showResponses = true">Wyświetl
+                        {{comment.comments.length}} odpowiedzi</a>
+                    <ng-template #elseBlock><a href="javascript:void(0)" class="link"
+                            (click)="showResponses = false">Schowaj
+                            odpowiedzi</a></ng-template>
+                    <ul class="clean-list comments level-2" *ngIf="showResponses">
+                        <li class="comment" *ngFor="let response of meme.comments; trackBy:commentsTrackBy">
+                            <div class="comment__content">
+                                <img [src]="response.author.image" alt="">
+                                <span class="author">{{response.author.name}}</span>
+                                <span class="content">{{response.content}}</span>
+                            </div>
+                            <div class="comment__buttons">
+                                <button class="btn btn--transparent btn--small"
+                                    (click)="addComment($event, comment.id)">Odpowiedz</button>
+                                <button class="btn btn--transparent btn--small btn--icon"><span
+                                        class="icon--arrow-up btn__icon btn__icon--transparent"></span>
+                                    {{response.pluses}}</button>
+                                <button class="btn btn--transparent btn--small btn--icon"><span
+                                        class="icon--arrow-down btn__icon btn__icon--transparent"></span>
+                                    {{response.minuses}}</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
