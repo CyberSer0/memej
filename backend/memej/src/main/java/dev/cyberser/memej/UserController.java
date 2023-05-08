@@ -38,8 +38,7 @@ public class UserController {
     
     @PostMapping(value = "/post", consumes = {"application/json"})
     public User createUser(@Valid @RequestBody User user) {
-        String passwordHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()); // - always hashing the password before saving it to the DB
-        user.setPasswordHash(passwordHash);
+        user.setPasswordHash(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt())); // - always hashing the password before saving it to the DB
         return userRepository.save(user);
     }
     
@@ -48,8 +47,7 @@ public class UserController {
     public User updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         user.setName(userDetails.getName());
-        String passwordHash = BCrypt.hashpw(userDetails.getPassword(), BCrypt.gensalt()); // - always hashing the password before saving it to the DB
-        user.setPasswordHash(passwordHash);
+        user.setPasswordHash(BCrypt.hashpw(userDetails.getPassword(), BCrypt.gensalt())); // - always hashing the password before saving it to the DB
         user.setImage(userDetails.getImage());
         return userRepository.save(user);
     }

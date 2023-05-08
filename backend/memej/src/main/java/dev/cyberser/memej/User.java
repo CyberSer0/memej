@@ -14,8 +14,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
 @Entity
 public class User {
     @Id                                                                                             // - primary key
