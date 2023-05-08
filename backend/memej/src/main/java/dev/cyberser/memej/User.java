@@ -18,24 +18,24 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Entity
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id                                                                                             // - primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)                                             // - generates new numbers based on the ones that came before
     private Long id;
     
     @NotBlank
     private String name;
 
-    @Transient
+    @Transient                                                                                      // - this cannot be held in the DB as is
     private String password;
 
-    @Column(name = "password")
+    @Column(name = "password")                                                                      // - this will be held in the "password" column
     private String passwordHash;
 
     @NotBlank
     private String image;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Nullable
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)                // - one user can be an author to many meme instances
+    @Nullable                                                                                       // - this parameter can be null (new user - no memes)
     private List<Meme> memes = new ArrayList<>();
 
     // METHODS
@@ -60,8 +60,15 @@ public class User {
     }
 
     public void setPassword(String password) {
-        String salt = BCrypt.gensalt();
-        this.passwordHash = BCrypt.hashpw(password, salt);
+        this.password = password;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getImage() {

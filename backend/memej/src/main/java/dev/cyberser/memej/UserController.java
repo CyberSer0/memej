@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -36,18 +38,20 @@ public class UserController {
     
     @PostMapping(value = "/post", consumes = {"application/json"})
     public User createUser(@Valid @RequestBody User user) {
-        user.setPassword(user.getPassword());
+        String passwordHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()); // - always hashing the password before saving it to the DB
+        user.setPasswordHash(passwordHash);
         return userRepository.save(user);
     }
+    
 
     @PutMapping("/put/{id}")
     public User updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         user.setName(userDetails.getName());
-        user.setPassword(userDetails.getPassword());
+        String passwordHash = BCrypt.hashpw(userDetails.getPassword(), BCrypt.gensalt()); // - always hashing the password before saving it to the DB
+        user.setPasswordHash(passwordHash);
         user.setImage(userDetails.getImage());
-        User updatedUser = userRepository.save(user);
-        return updatedUser;
+        return userRepository.save(user);
     }
 
     @DeleteMapping("/delete/{id}")
